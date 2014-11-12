@@ -8,6 +8,9 @@ public class SuperArray{
   }
     
   public SuperArray(int size){
+    if(size<0){
+      throw new IndexOutOfBoundsException();
+    }
     setLength(size);
     data = new Object[size];
   }
@@ -35,6 +38,9 @@ public class SuperArray{
   }
 
   public void add(int index, Object e){
+    if(index<0 || index>(getLength()-1)){
+      throw new IndexOutOfBoundsException();
+    }
     int t = 0;
     int place=0;
     for(int i = index; i<getLength(); i++){
@@ -70,85 +76,45 @@ public class SuperArray{
     }else{
 	    for(int i=0; i<newSize; i++){
         newData[i]=data[i];
-	    }
+      }
     }
     setLength(newSize);
     data=newData;
   }
 
   public void clear(){
-    for(int i=0; i<getLength(); i++){
-	    data[i] = null;
-    }
+    resize(0);
   }
 
   public Object get(int index){
-    if(index < 0  || index >= size()){
-	    return "Error. Index is out of range.";
-    }else{
-	    return data[index];
+    if(index<0 || index>(getLength()-1)){
+      throw new IndexOutOfBoundsException();
     }
+    return data[index];
   }
 
   public Object set(int index, Object e){
-    if(index < 0  || index >= size()){
-	    return null;
-    }else{
-	    Object replaced = new Object();
-	    replaced = data[index];
-	    data[index] = e;
-	    return replaced;
+    if(index<0 || index>(getLength()-1)){
+      throw new IndexOutOfBoundsException();
     }
+    Object replaced = new Object();
+    replaced = data[index];
+    data[index] = e;
+    return replaced;
   }
 
   public Object remove(int index){
+    if(index<0 || index>(getLength()-1)){
+      throw new IndexOutOfBoundsException();
+    }
     Object removed = new Object();
     if(index < 0  || index >= size()){
-	    removed=null;
+      removed=null;
     }else{
 	    removed = data[index];
 	    data[index] = null;
     }
     return removed;
-  }
-
-  public static void main(String[]args){
-    SuperArray b = new SuperArray(12);
-    b.set(0,'T');
-    b.set(1,'h');
-    b.set(2,'e');
-    b.set(4,"kitty");
-    b.set(5," ");
-    b.set(6,'c');
-    b.set(7,'4');
-    b.set(8,'t');
-    b.set(9," ");
-    b.set(10,"is");
-    b.set(11,"cute.");
-    System.out.println(b.toString());
-
-    b.add("meow");
-    System.out.println(b.toString());
-  
-    b.add(3,"cute");
-    System.out.println(b.toString());
-
-    System.out.println(b.size());
-  
-    b.resize(12);
-    System.out.println(b.toString());
-
-    System.out.println(b.get(11));
-
-    System.out.println(b.set(11,"kawaii."));
-    System.out.println(b.toString());
-
-    System.out.println(b.remove(4));
-    System.out.println(b.toString());
-
-    b.clear();
-    System.out.println(b.toString());
-      
   }
 
 }
