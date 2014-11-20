@@ -60,11 +60,14 @@ public class WordGrid{
             }
           }
         }
-      }
+    }
     if(c==word.length()){
-      return true;
+	for(int m = 0;m<word.length();m++){
+	    data[row][column+m]=word.charAt(m);
+   	}
+	return true;
     }else{
-      return false;
+	return false;
     }
   }
 
