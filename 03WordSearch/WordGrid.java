@@ -11,7 +11,7 @@ public class WordGrid{
       data = new char[rows][columns];
       for(int i = 0; i<rows; i++){
         for(int s = 0; s<columns; s++){
-          data[i][s]= ' ';
+          data[i][s]= '_';
         }
       }
     }
@@ -48,29 +48,38 @@ public class WordGrid{
      */
   public boolean addWordHorizontal(String word,int row, int column){
     int c=0;
-    if((data.length-row)>=word.length()){
+    if((data[row].length-column)>=word.length()){
         for(int i = 0; i<word.length();i++){
-          if(data[row][column+i]== ' '){
+          String x = "";
+          x=x+data[row][column+i];
+          String y = "";
+          y=y+'_';
+          if(x.equals(y)){
             c++;
           }else{
             String a = "";
             a = a + data[row][column+i];
-            if(a.equals(word.substring(i,i+1))){
+            String b = "";
+            b = b+word.charAt(i);
+            if(a.equals(b)){
                 c++;
             }
           }
         }
     }
     if(c==word.length()){
-	for(int m = 0;m<word.length();m++){
-	    data[row][column+m]=word.charAt(m);
-   	}
 	return true;
     }else{
 	return false;
     }
   }
-
+  public void addWord(String word,int row,int column){
+    if(addWordHorizontal(word,row,column)){
+      for(int m = 0;m<word.length();m++){
+	    data[row][column+m]=word.charAt(m);
+      }
+    }
+  }
     //vertical + diagonal should be implemented as well.
 
 }

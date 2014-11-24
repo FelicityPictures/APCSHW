@@ -3,7 +3,7 @@ public class Driver{
 	WordGrid x = new WordGrid(5,5);
 	System.out.println(x.toString());
 
-	x.addWordHorizontal("meow",3,0);
+	x.addWord("meow",3,0);
 	System.out.println(x.toString());
     }
 }
