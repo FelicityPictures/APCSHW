@@ -4,7 +4,7 @@ public class WordGrid{
   private char[][]data;
   private ArrayList<String>words=new ArrayList<String>();
   private ArrayList<String>wordsUsed=new ArrayList<String>();
-  Random r = new Random();
+  Random r;
 
   /**Initialize the grid to the size specified and fill all of the positions
    *with spaces.
@@ -29,16 +29,16 @@ public class WordGrid{
    *@return a String with each character separated by spaces, and each row
    *separated by newlines.
    */
-    public String toString(){
-      String a = "";
-      for (int i=0; i<data.length; i++){
-        for(int s = 0; s<data[i].length; s++){
-          a = a + data[i][s] + " ";
-        }
-        a = a + "\n";
+  public String toString(){
+    String a = "";
+    for (int i=0; i<data.length; i++){
+      for(int s = 0; s<data[i].length; s++){
+        a = a + data[i][s] + " ";
       }
-      return a;
+      a = a + "\n";
     }
+    return a;
+  }
 
   public void loadWordsFromFile(String fileName, boolean fillRandomLetters)throws FileNotFoundException{
     File text=null;
@@ -65,6 +65,26 @@ public class WordGrid{
     }
   }
 
+  public String wordsInPuzzle(){
+    String a = "";
+    int c = 0;
+    for(int i=0 ; i<wordsUsed.size() ; i++){
+      if(c<4){
+        a = a + wordsUsed.get(i) + "/t";
+        c++;
+      }else{
+        c = 0;
+        a = a + "\n" + wordsUsed.get(i) + "/t";
+        c++;
+      }
+    }
+    return a;
+  }
+
+  public void setSeed(long seed){
+    r = new Random(seed);
+  }
+
   /**Attempts to add a given word to the specified position of the WordGrid.
    *The word is added from left to right, must fit on the WordGrid, and must
    *have a corresponding letter to match any letters that it overlaps.
@@ -81,35 +101,135 @@ public class WordGrid{
       for(int i = 0; i<word.length();i++){
         String x = "";
         x=x+data[row][column+i];
-        String y = "";
-        y=y+'_';
+        String y = "_";
         if(x.equals(y)){
           c++;
         }else{
-          String a = "";
-          a = a + data[row][column+i];
           String b = "";
           b = b+word.charAt(i);
-          if(a.equals(b)){
+          if(x.equals(b)){
             c++;
           }
         }
       }
     }
     if(c==word.length()){
-	return true;
+      return true;
     }else{
-	return false;
+      return false;
     }
   }
-  public void addWord(String word,int row,int column){
+
+  public boolean addWordHorizontalB(String word,int row,int column){
+    int c = 0;
+    if((data[row].length-(data[row].length-column))>=(word.length()+1)){
+      for(int i = 0; i<word.length(); i++){
+        String x = "";
+        x=x+data[row][column-i];
+        String y = "_";
+        if(x.equals(y)){
+          c++;
+        }else{
+          String b = "";
+          b = b + word.charAt(i);
+          if(x.equals(b)){
+            c++;
+          }
+        }
+      }
+    }
+    if(c==word.length()){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public boolean addWordVertical(String word,int row,int column){
+    int c = 0;
+    if((data.length-row)>=word.length()){
+      for(int i=0; i<word.length(); i++){
+        String x = "";
+        x=x+data[row+i][column];
+        String y = "_";
+        if(x.equals(y)){
+          c++;
+        }else{
+          String b = "";
+          b=b+word.charAt(i);
+          if(x.equals(b)){
+            c++;
+          }
+        }
+      }
+    }
+    if(c==word.length()){
+      return true;
+    }else{
+      return false;
+    }
+  }
+      
+ public boolean addWordVerticalB(String word,int row,int column){
+    int c = 0;
+    if((data.length-(data.length-row))>=word.length()){
+      for(int i=0; i<word.length(); i++){
+        String x = "";
+        x=x+data[row-i][column];
+        String y = "_";
+        if(x.equals(y)){
+          c++;
+        }else{
+          String b = "";
+          b=b+word.charAt(i);
+          if(x.equals(b)){
+            c++;
+          }
+        }
+      }
+    }
+    if(c==word.length()){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public void addWordH(String word,int row,int column){
     if(addWordHorizontal(word,row,column)){
       for(int m = 0;m<word.length();m++){
-	    data[row][column+m]=word.charAt(m);
+        data[row][column+m]=word.charAt(m);
       }
       wordsUsed.add(word);
     }
   }
-    //vertical + diagonal should be implemented as well.
+
+  public void addWordHB(String word,int row,int column){
+    if(addWordHorizontalB(word,row,column)){
+      for(int m = 0;m<word.length();m++){
+        data[row][column-m]=word.charAt(m);
+      }
+      wordsUsed.add(word);
+    }
+  }
+
+  public void addWordV(String word, int row, int column){
+    if(addWordVertical(word,row,column)){
+      for(int m = 0; m<word.length();m++){
+        data[row+m][column]=word.charAt(m);
+      }
+      wordsUsed.add(word);
+    }
+  }
+
+  public void addWordVB(String word, int row, int column){
+    if(addWordVerticalB(word,row,column)){
+      for(int m = 0; m<word.length();m++){
+        data[row-m][column]=word.charAt(m);
+      }
+      wordsUsed.add(word);
+    }
+  }
+  //vertical + diagonal should be implemented as well.
 
 }
