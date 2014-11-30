@@ -40,7 +40,8 @@ public class WordGrid{
     return a;
   }
 
-  public void loadWordsFromFile(String fileName, boolean fillRandomLetters)throws FileNotFoundException{
+  public void loadWordsFromFile(String fileName, boolean fillRandomLetters)
+    throws FileNotFoundException{
     File text=null;
     Scanner scan=null;
     try{

@@ -3,25 +3,14 @@ import java.io.*;
 public class Driver{
 
   public static void main(String[]args)throws FileNotFoundException{
-      
+
+    //instructions for using Driver   
     if (args.length != 3 && args.length != 4) {     
       System.out.println("Usage:");
       System.out.println("java WordGrid <rows> <columns> [seed <answer>]");
       return;
     }
-      
-    File text=null;
-    Scanner scan=null;
-    try{
-      text = new File("APCSHW/03WordSearch/HappyWords.txt");
-      scan = new Scanner(text);
-    }catch(Exception e){
-      System.out.println("File was not found.");
-    }
-    while(scan.hasNextLine()){
-      words.add(scan.nextLine());
-    }
-
+    
     //set up empty word search grid
     String s = args[0];
     String w = args[1];
@@ -34,9 +23,7 @@ public class Driver{
       x.setSeed(rands);
     }
       
-
-    //test it out
-    x.addWordBU("meow",4,4);
-    System.out.println(x.toString());
+    //make word search
+    loadWordsFromFile("APCSHW/03WordSearch/HappyWords.txt");
   }
 }
