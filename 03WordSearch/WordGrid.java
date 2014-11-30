@@ -98,7 +98,7 @@ public class WordGrid{
   private boolean addWordHorizontal(String word,int row, int column){
     try {
       for (int i = 0; i < word.length(); ++i) {
-        if (data[row][column + i] == ' ' || data[row][column + i] == word.charAt(i)) {
+        if (data[row][column + i] == '_' || data[row][column + i] == word.charAt(i)) {
           continue;
         }
         return false;
@@ -112,7 +112,8 @@ public class WordGrid{
   private boolean addWordHorizontalB(String word,int row,int column){
     try {
       for (int i = 0; i < word.length(); ++i) {
-        if (data[row][column - i] == ' ' || data[row][column - i] == word.charAt(i)) {
+        if (data[row][column - i] == '_' ||
+            data[row][column - i] == word.charAt(i)) {
           continue;
         }
         return false;
@@ -126,7 +127,8 @@ public class WordGrid{
   private boolean addWordVertical(String word,int row,int column){
     try {
       for (int i = 0; i < word.length(); ++i) {
-        if (data[row + 1][column] == ' ' || data[row + 1][column] == word.charAt(i)) {
+        if (data[row + i][column] == '_' ||
+            data[row + i][column] == word.charAt(i)){
           continue;
         }
         return false;
@@ -140,7 +142,8 @@ public class WordGrid{
   private boolean addWordVerticalB(String word,int row,int column){
     try {
       for (int i = 0; i < word.length(); ++i) {
-        if (data[row - 1][column] == ' ' || data[row - 1][column] == word.charAt(i)) {
+        if (data[row - i][column] == '_' ||
+            data[row - i][column] == word.charAt(i)) {
           continue;
         }
         return false;
@@ -154,7 +157,8 @@ public class WordGrid{
   private boolean addWordDiagD(String word, int row, int column){
     try {
       for (int i = 0; i < word.length(); ++i) {
-        if (data[row + i][column + i] == ' ' || data[row + i][column + i] == word.charAt(i)) {
+        if (data[row + i][column + i] == '_' ||
+            data[row + i][column + i] == word.charAt(i)) {
           continue;
         }
         return false;
@@ -168,7 +172,8 @@ public class WordGrid{
   private boolean addWordDiagU(String word, int row, int column){
     try {
       for (int i = 0; i < word.length(); ++i) {
-        if (data[row - i][column + i] == ' ' || data[row - i][column + i] == word.charAt(i)) {
+        if (data[row - i][column + i] == '_' ||
+            data[row - i][column + i] == word.charAt(i)) {
           continue;
         }
         return false;
@@ -182,7 +187,8 @@ public class WordGrid{
   private boolean addWordDiagBD(String word, int row, int column){
     try {
       for (int i = 0; i < word.length(); ++i) {
-        if (data[row + i][column - i] == ' ' || data[row + i][column - i] == word.charAt(i)) {
+        if (data[row + i][column - i] == '_' ||
+            data[row + i][column - i] == word.charAt(i)) {
           continue;
         }
         return false;
@@ -196,7 +202,8 @@ public class WordGrid{
   private boolean addWordDiagBU(String word, int row, int column){
     try {
       for (int i = 0; i < word.length(); ++i) {
-        if (data[row - i][column - i] == ' ' || data[row - i][column - i] == word.charAt(i)) {
+        if (data[row - i][column - i] == '_' ||
+            data[row - i][column - i] == word.charAt(i)) {
           continue;
         }
         return false;
@@ -246,7 +253,7 @@ public class WordGrid{
   public void addWordDD(String word, int row, int column){
     if(addWordDiagD(word, row, column)){
       for(int m = 0; m<word.length();m++){
-        data[row + 1][column + 1] = word.charAt(m);
+        data[row + m][column + m] = word.charAt(m);
       }
       wordsUsed.add(word);
     }
@@ -255,7 +262,7 @@ public class WordGrid{
   public void addWordDU(String word, int row, int column){
     if(addWordDiagU(word, row, column)){
       for(int m = 0; m<word.length();m++){
-        data[row - 1][column + 1] = word.charAt(m);
+        data[row - m][column + m] = word.charAt(m);
       }
       wordsUsed.add(word);
     }
@@ -264,7 +271,7 @@ public class WordGrid{
   public void addWordDBD(String word, int row, int column){
     if(addWordDiagBD(word, row, column)){
       for(int m = 0; m<word.length();m++){
-        data[row + 1][column - 1] = word.charAt(m);
+        data[row + m][column - m] = word.charAt(m);
       }
       wordsUsed.add(word);
     }
@@ -273,25 +280,45 @@ public class WordGrid{
   public void addWordBU(String word, int row, int column){
     if(addWordDiagBU(word, row, column)){
       for(int m = 0; m<word.length();m++){
-        data[row - 1][column - 1] = word.charAt(m);
+        data[row - m][column - m] = word.charAt(m);
       }
       wordsUsed.add(word);
     }
   }
-
-  /*
-    public void addWordDD(String word,int row,int column){
-    if(addWordVertical(word,row,coluumn) && addWordHorizontal()){
-    for(int m = 0; m<word.length();m++){
-    data[row+m][column+m]=word.charAt(m);
+  
+  public void addWordsRandomly(ArrayList<String>addWords){
+    for(int i = 0; i<addWords.size() ; i++){
+      int p = r.nextInt(8);
+      int rr = r.nextInt(data.length);
+      int cc = r.nextInt(data[0].length);
+      if(p == 0){
+        addWordH(addWords.get(i),rr,cc);
+      }
+      if(p == 1){
+        addWordHB(addWords.get(i),rr,cc);
+      }
+      if(p == 2){
+        addWordV(addWords.get(i),rr,cc);
+      }
+      if(p == 3){
+        addWordVB(addWords.get(i),rr,cc);
+      }
+      if(p == 4){
+        addWordDD(addWords.get(i),rr,cc);
+      }
+      if(p == 5){
+        addWordDU(addWords.get(i),rr,cc);
+      }
+      if(p == 6){
+        addWordDBD(addWords.get(i),rr,cc);
+      }
+      if(p == 7){
+        addWordBU(addWords.get(i),rr,cc);
+      }
     }
-    wordsUsed.add(word);
-    }
-    }
-  */
-  //vertical + diagonal should be implemented as well.
-
-
+    wordsUsed=addWords;
+  }
+  
   public static void main(String[]args)throws FileNotFoundException{
       
     if (args.length != 3 && args.length != 4) {     
@@ -302,12 +329,12 @@ public class WordGrid{
       
 
     //set up empty word search grid
-    String s = args[1];
-    String w = args[2];
+    String s = args[0];
+    String w = args[1];
     int ro = Integer.parseInt(s);
     int col = Integer.parseInt(w);
     WordGrid x = new WordGrid(ro,col);
-    String rs = args[3];
+    String rs = args[2];
     int rands = Integer.parseInt(rs);
     if(rands>=0){
       x.setSeed(rands);
@@ -315,15 +342,15 @@ public class WordGrid{
       
 
     //test it out
-    /*  x.addWordH("meow",3,0);
-        System.out.println(x.toString());
-    */
+    x.addWordH("meow",3,0);
+    System.out.println(x.toString());
+    
     x.addWordHB("woof",3,3);
     System.out.println(x.toString());
-    /*
-      x.addWordV("rawr",0,2);
-      System.out.println(x.toString());
-    */
+    
+    x.addWordV("rawr",0,2);
+    System.out.println(x.toString());
+    
     x.addWordVB("evil",3,1);
     System.out.println(x.toString());
   }
