@@ -3,7 +3,6 @@ public class SuperArray{
   public String[] data;
     
   public SuperArray(){
-    setLength(10);
     data = new String[10];
   }
     
@@ -19,7 +18,7 @@ public class SuperArray{
     return length;
   }
 
-  public void setLength(int l){
+  private void setLength(int l){
     length = l;
   }
     
@@ -64,7 +63,13 @@ public class SuperArray{
   }
 
   public int size(){
-    return getLength();
+      int c=0;
+      for(int i = 0; i<getLength();i++){
+	  if(data[i]!= null){
+	      c++;
+	  }
+      }
+      return c;
   }
 
   public void resize(int newSize){

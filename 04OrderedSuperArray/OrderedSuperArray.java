@@ -1,14 +1,15 @@
 import java.util.*;
 public class OrderedSuperArray extends SuperArray{
-
+    
+    public OrderedSuperArray(){
+	data = new String[0];
+    }
+    
     public void sort(){
-	for(int i=0 ; i<super.getLength() ; i++){
-	    String x = super.get(i);
-	    String y = super.get(i+1);
-	    int result = x.compareTo(y);
+	for(int i=0 ; i<size()-1 ; i++){
+	    int result = get(i).compareTo(get(i+1));
 	    if(result > 0){
-		add(i+1,super.get(i));
-		remove(i);
+		String x = //where I left off
 	    }
 	}
     }
@@ -20,5 +21,6 @@ public class OrderedSuperArray extends SuperArray{
 	t.add("Aatrox");
 	t.add("dog");
 	t.sort();
+	System.out.println(t.toString());
 	    }
 }
