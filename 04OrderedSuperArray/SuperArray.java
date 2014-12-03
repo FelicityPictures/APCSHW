@@ -92,4 +92,17 @@ public class SuperArray{
     }
     return temp;
   }
+
+  public void insertionSort(){
+    for(int i = 1; i<size()-1;i++){
+      int result = data[i].compareTo(data[i+1]);
+      if(result>0){
+        String x = new String(data[i]);
+        String y = new String(data[i+1]);
+        data[i] = y;
+        data[i+1]=x;
+        i--;
+      }
+    }
+  }
 }
