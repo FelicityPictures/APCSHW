@@ -96,12 +96,19 @@ public class SuperArray{
   public void insertionSort(){
     for(int i = 1; i<size()-1;i++){
       int result = data[i].compareTo(data[i+1]);
+      String x = new String(data[i]);
+      String y = new String(data[i+1]);
       if(result>0){
-        String x = new String(data[i]);
-        String y = new String(data[i+1]);
         data[i] = y;
         data[i+1]=x;
-        i--;
+      }
+      for(int m = i;m>0;m--){
+        String z = new String(data[m-1]);
+        result = y.compareTo(z);
+        if(result<0){
+          data[m]=z;
+          data[m-1]=y;
+        }
       }
     }
   }
