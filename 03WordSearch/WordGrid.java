@@ -156,7 +156,6 @@ public class WordGrid{
     for(int m = 0;m<word.length();m++){
       data[row][column+m]=word.charAt(m);
     }
-    wordsUsed.add(word);
     return true;
   }
 
@@ -175,7 +174,6 @@ public class WordGrid{
     for(int m = 0;m<word.length();m++){
       data[row][column-m]=word.charAt(m);
     }
-    wordsUsed.add(word);
     return true;
   }
 
@@ -194,7 +192,6 @@ public class WordGrid{
     for(int m = 0; m<word.length();m++){
       data[row+m][column]=word.charAt(m);
     }
-    wordsUsed.add(word);
     return true;
   }
       
@@ -213,7 +210,6 @@ public class WordGrid{
     for(int m = 0; m<word.length();m++){
       data[row-m][column]=word.charAt(m);
     }
-    wordsUsed.add(word);
     return true;
   }
       
@@ -232,7 +228,6 @@ public class WordGrid{
     for(int m = 0; m<word.length();m++){
       data[row + m][column + m] = word.charAt(m);
     }
-    wordsUsed.add(word);
     return true;
   }
   
@@ -251,7 +246,6 @@ public class WordGrid{
     for(int m = 0; m<word.length();m++){
       data[row - m][column + m] = word.charAt(m);
     }
-    wordsUsed.add(word);
     return true;
   }
 
@@ -270,7 +264,6 @@ public class WordGrid{
     for(int m = 0; m<word.length();m++){
       data[row + m][column - m] = word.charAt(m);
     }
-    wordsUsed.add(word);
     return true;
   }
 
@@ -289,7 +282,6 @@ public class WordGrid{
 for(int m = 0; m<word.length();m++){
         data[row - m][column - m] = word.charAt(m);
       }
-      wordsUsed.add(word);
     return true;
   }
   
@@ -323,7 +315,6 @@ for(int m = 0; m<word.length();m++){
         addWordBU(addWords.get(i),rr,cc);
       }
     }
-    wordsUsed=addWords;
   }
   
   public static void main(String[]args)throws FileNotFoundException{
