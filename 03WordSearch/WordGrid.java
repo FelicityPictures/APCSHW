@@ -117,11 +117,11 @@ public class WordGrid{
     int c = 0;
     for(int i=0 ; i<wordsUsed.size() ; i++){
       if(c<4){
-        a = a + wordsUsed.get(i) + "/t";
+        a = a + wordsUsed.get(i) + "\t";
         c++;
       }else{
         c = 0;
-        a = a + "\n" + wordsUsed.get(i) + "/t";
+        a = a + "\n" + wordsUsed.get(i) + "\t";
         c++;
       }
     }
@@ -326,41 +326,39 @@ for(int m = 0; m<word.length();m++){
     wordsUsed=addWords;
   }
   
- public static void main(String[]args)throws FileNotFoundException{
-
-    //instructions for using Driver   
+  public static void main(String[]args)throws FileNotFoundException{
+      
     if (args.length != 3 && args.length != 4) {     
       System.out.println("Usage:");
       System.out.println("java WordGrid <rows> <columns> [seed <answer>]");
       return;
     }
-    
-    //set up word grid
+      
+
+    //set up empty word search grid
     String s = args[0];
     String w = args[1];
     int ro = Integer.parseInt(s);
     int col = Integer.parseInt(w);
     WordGrid x = new WordGrid(ro,col);
-    
-    try{
-      String rs = args[2];
-      int rands = Integer.parseInt(rs);
-      if(rands>=0){
-        x.setSeed(rands);
-      }
-    }catch(Exception e){
+    String rs = args[2];
+    int rands = Integer.parseInt(rs);
+    if(rands>=0){
+      x.setSeed(rands);
     }
+      
 
-    boolean t = false;
-    try{
-      String lie = args[3];
-      int tf = Integer.parseInt(s);
-      if(tf == 1){
-        t = true;
-      }
-    }catch(Exception e){
-    }
-    //make word search
-    loadWordsFromFile("APCSHW/03WordSearch/HappyWords.txt", t);
+    //test it out
+    x.addWordH("meow",3,0);
+    System.out.println(x.toString());
+    
+    x.addWordHB("woof",3,3);
+    System.out.println(x.toString());
+    
+    x.addWordV("rawr",0,2);
+    System.out.println(x.toString());
+    
+    x.addWordVB("evil",3,1);
+    System.out.println(x.toString());
   }
 }

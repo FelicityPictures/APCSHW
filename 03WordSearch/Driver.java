@@ -39,6 +39,8 @@ public class Driver{
     }catch(Exception e){
     }
     //make word search
-    x.loadWordsFromFile("APCSHW/03WordSearch/HappyWords.txt", t);
+    x.loadWordsFromFile("C:\\Users\\Felicity\\Desktop\\APCSHW\\03WordSearch\\HappyWords.txt", t);
+    System.out.println(x.wordsInPuzzle());
+    System.out.println(x.toString());
   }
 }
