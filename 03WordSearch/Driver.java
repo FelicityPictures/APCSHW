@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.*;
 public class Driver{
 
-  public static WordGrid x;
 
   public static void main(String[]args)throws FileNotFoundException{
 
@@ -18,7 +17,7 @@ public class Driver{
     String w = args[1];
     int ro = Integer.parseInt(s);
     int col = Integer.parseInt(w);
-    x = new WordGrid(ro,col);
+    WordGrid x = new WordGrid(ro,col);
     
     try{
       String rs = args[2];
@@ -29,12 +28,12 @@ public class Driver{
     }catch(Exception e){
     }
 
-    boolean t = false;
+    boolean t = true;
     try{
       String lie = args[3];
-      int tf = Integer.parseInt(s);
+      int tf = Integer.parseInt(lie);
       if(tf == 1){
-        t = true;
+        t = false;
       }
     }catch(Exception e){
     }

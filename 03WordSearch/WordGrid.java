@@ -40,7 +40,7 @@ public class WordGrid{
     return a;
   }
 
-  public void loadWordsFromFile(String fileName, boolean fillRandomLetters)
+  public void loadWordsFromFile(String fileName, boolean t)
     throws FileNotFoundException{
     File text=null;
     Scanner scan=null;
@@ -96,7 +96,7 @@ public class WordGrid{
         }
       }
     }
-    if(fillRandomLetters){
+    if(t){
       fillRandomLetters();
     }
   }
@@ -107,7 +107,7 @@ public class WordGrid{
         if (data[i][m] != '_') {
           continue;
         }
-        data[i][m] = (char)(r.nextInt(26) + 65);
+        data[i][m] = (char)(r.nextInt(26)+'a');
       }
     }
   }
