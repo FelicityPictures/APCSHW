@@ -1,125 +1,95 @@
 public class SuperArray{
-  private int length;
-  public String[] data;
-    
+  int size;
+  String[] data;
+
   public SuperArray(){
-    data = new String[10];
-  }
-    
-  public SuperArray(int size){
-    if(size<0){
-      throw new IndexOutOfBoundsException();
-    }
-    setLength(size);
-    data = new String[size];
-  }
-    
-  public int getLength(){
-    return length;
+    this(10);
   }
 
-  private void setLength(int l){
-    length = l;
+  public SuperArray(int startCapacity){
+    size = 0;
+    data = new String[ startCapacity ];
   }
-    
+		
   public String toString(){
-    String display = "[ ";
-    for(int i=0; i<getLength(); i++){
-      display = display + data[i] + " ";
+    String res = "[";
+    for(int i = 0; i < size; i++){
+      res += data[i];
+      if(i != size - 1){
+        res += " ";
+      }
     }
-    display = display + "]";
-    return display;
+    return res + "]";
   }
 
-  public void add(String e){
-    resize(getLength()+1);
-    data[getLength()-1]=e;
+  public void add(String o){
+    if(size() == data.length){
+      resize(size * 2);
+    }
+    data[ size ] = o;
+    size++;
   }
-
-  public void add(int index, String e){
-    if(index<0 || index>(getLength()-1)){
+  public void add(int index, String o){
+    if(index < 0 || index > size() ){
       throw new IndexOutOfBoundsException();
+    }				
+    if(size() == data.length){
+      resize( size * 2 );
     }
-    int t = 0;
-    int place=0;
-    for(int i = index; i<getLength(); i++){
-	    if (data[i] == null){
-        place = i;
-        t++;
-        break;
-	    }
+    for(int i = data.length - 1; i > index; i--){
+      data[i] = data[i - 1];
     }
-    if(t>0){
-	    for(int i=place; i>index; i--){
-        data[i]=data[i-1];
-	    }
-    }else{
-	    resize(getLength()+1);
-	    for(int i=getLength()-1; i>index; i--){
-        data[i]=data[i-1];
-	    }
-    }
-    data[index]=e;
+    data[ index ] = o;
+    size++;
   }
 
   public int size(){
-      int c=0;
-      for(int i = 0; i<getLength();i++){
-	  if(data[i]!= null){
-	      c++;
-	  }
-      }
-      return c;
-  }
-
-  public void resize(int newSize){
-    String[]newData = new String [newSize];
-    if(newSize>getLength()){
-	    for(int i=0; i<getLength(); i++){
-        newData[i]=data[i];
-      }
-    }else{
-	    for(int i=0; i<newSize; i++){
-        newData[i]=data[i];
-      }
-    }
-    setLength(newSize);
-    data=newData;
+    return size;
   }
 
   public void clear(){
-    resize(0);
+    size = 0;
+  }
+
+  public void resize(int newCapacity){
+    String[] newData = new String[newCapacity];
+    int max = Math.min(newCapacity,size);
+    for(int i = 0; i < max; i++){
+      newData[i]= data[i];
+    }
+    data = newData;
+  }
+		
+  public String set(int index, String o){
+    if(index < 0 || index >= size()){
+      throw new IndexOutOfBoundsException();
+    }
+    String temp = data[index];
+    data[index]= o;
+    return temp;
   }
 
   public String get(int index){
-    if(index<0 || index>(getLength()-1)){
+    if(index < 0 || index >= size()){
       throw new IndexOutOfBoundsException();
     }
     return data[index];
   }
 
-  public String set(int index, String e){
-    if(index<0 || index>(getLength()-1)){
-      throw new IndexOutOfBoundsException();
-    }
-    String replaced = new String();
-    replaced = data[index];
-    data[index] = e;
-    return replaced;
-  }
-
   public String remove(int index){
-    if(index<0 || index>(getLength()-1)){
+    if(index < 0 || index >= size()){
       throw new IndexOutOfBoundsException();
     }
-    String removed = new String();
-    if(index < 0  || index >= size()){
-      removed=null;
-    }else{
-	    removed = data[index];
-	    data[index] = null;
-    }
-    return removed;
-  }
 
+    String temp = data[index];
+    while(index < size() - 1){
+      data[index] = data[index + 1];
+      index++;
+    }
+    size--;
+    if(size < data.length / 4){
+      resize(data.length / 2);
+    }
+    return temp;
+  }
 }
