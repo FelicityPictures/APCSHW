@@ -2,6 +2,8 @@ import java.util.*;
 import java.io.*;
 public class Driver{
 
+  public static WordGrid x;
+
   public static void main(String[]args)throws FileNotFoundException{
 
     //instructions for using Driver   
@@ -16,7 +18,7 @@ public class Driver{
     String w = args[1];
     int ro = Integer.parseInt(s);
     int col = Integer.parseInt(w);
-    WordGrid x = new WordGrid(ro,col);
+    x = new WordGrid(ro,col);
     
     try{
       String rs = args[2];
@@ -37,6 +39,6 @@ public class Driver{
     }catch(Exception e){
     }
     //make word search
-    loadWordsFromFile("APCSHW/03WordSearch/HappyWords.txt", t);
+    x.loadWordsFromFile("APCSHW/03WordSearch/HappyWords.txt", t);
   }
 }
