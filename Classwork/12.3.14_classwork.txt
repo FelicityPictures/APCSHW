@@ -1,0 +1,7 @@
+I tested my insertionSort() method creating an array, printing
+it, and then using insertionSort. The resulting array was in
+alphabetical order, showing that my insertionSort() method worked.
+
+In order to test the two insertionSort methods, I created two
+identical arrays and used a different insertionSort method for
+each array.
