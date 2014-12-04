@@ -28,13 +28,17 @@ public class OrderedSuperArray extends SuperArray{
 	while(!data[x].equals(t)){
 	    int result;
 	    try{
-		result = data[m].compareTo(t);    
+		result = data[x].compareTo(t);    
 	    }catch(Exception e){}
+	    c++;
 	    if(result<0){
-		c++;
-		
+		x=x+m;
+	    }
+	    if(result>0){
+		x=x-m;
+	    }
 	}
-	
+	if(data[x].equals(t)){
     }
 
     /*
