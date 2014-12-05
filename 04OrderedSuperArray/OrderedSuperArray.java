@@ -21,33 +21,42 @@ public class OrderedSuperArray extends SuperArray{
     return x;
   }
 
-    public int search(String t){
-	int c = 0;
-	int m = Math.pow(2,c);
-	int x = size/2;
-	while(!data[x].equals(t)){
-	    int result;
-	    try{
-		result = data[x].compareTo(t);    
-	    }catch(Exception e){}
+  public int search(String t){
+    int c = 0;
+    int m = (int)Math.pow(2,c);
+    int x = size/2;
+    while(!data[x].equals(t)){
+      int result = data[x].compareTo(t);    
 	    c++;
 	    if(result<0){
-		x=x+m;
+        x=x+m;
 	    }
 	    if(result>0){
-		x=x-m;
+        x=x-m;
 	    }
-	}
-	if(data[x].equals(t)){
     }
+    return x;
+  }
+  
+  public static void main(String[]args){
+    SuperArray test = new OrderedSuperArray();
+    test.add("dog");
+    test.add("cat");
+    test.add("frog");
+    test.add("beetle");
+    test.add("cows");
+    test.add("turtle");
+    test.add("hedgehog");
+    test.add("chameleon");
+    test.add("lion");
+    test.add("ferret");
+    test.add("bird");
+    System.out.println(test.toString());
+    try{
+      System.out.println(test.find("lion"));
+    }catch(Exception e){
+      System.out.println("String not found in the array.");
+    }
+  }
 
-    /*
-    public int search(String t){
-	for(int c=0;math.pow(2,c)<size;c++){
-	    int m = size/math.pow(2,c);
-	    if(data[m].equals(t)){
-		return m;
-	    }
-    }
-    */
 }
