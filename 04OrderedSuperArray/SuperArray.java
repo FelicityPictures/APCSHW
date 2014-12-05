@@ -113,14 +113,30 @@ public class SuperArray{
     }
   }
 
-  public int find(String t){
-    for(int i=0;0<size;i++){
-	    if(data[i].equals(t)){
-        return i;
+    public void selectionSort(){
+	for(int m=0; m<size-1; m++){
+	    String s=data[m];
+	    for(int i=m; i<size-1; i++){
+		int result = data[i].compareTo(data[i+1]);
+		if(result>0){
+		    s = data[i+1];
+		    remove(i+1);
+		}
 	    }
+	    if(!s.equals(data[m])){
+		add(m,s);
+	    }
+	}
     }
-    return -10;
-  }
+
+    public int find(String t){
+	for(int i=0;0<size;i++){
+	    if(data[i].equals(t)){
+		return i;
+	    }
+	}
+	return -10;
+    }
 
   public static void main(String[]args){
     SuperArray test = new SuperArray();
@@ -136,10 +152,12 @@ public class SuperArray{
     test.add("ferret");
     test.add("bird");
     System.out.println(test.toString());
-    try{
+    //testing find method
+    /*
+ try{
       System.out.println(test.find("lion"));
     }catch(Exception e){
       System.out.println("String not found in the array.");
-    }
-  }
+      }
+    */
 }
