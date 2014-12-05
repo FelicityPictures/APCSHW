@@ -21,22 +21,33 @@ public class OrderedSuperArray extends SuperArray{
     return x;
   }
 
-  public static void main(String[]args){
-    OrderedSuperArray t = new OrderedSuperArray();
-    t.add("cat");
-    t.add("mouse");
-    t.add("apple");
-    t.add("dog");
-    t.add("zebra");
-    t.add("banana");
-    t.add("tiger");
-    t.add("phone");
-    t.add("eraser");
-    t.add("bubbles");
-    t.insertionSort();
-    System.out.println(t.toString());
+    public int search(String t){
+	int c = 0;
+	int m = Math.pow(2,c);
+	int x = size/2;
+	while(!data[x].equals(t)){
+	    int result;
+	    try{
+		result = data[x].compareTo(t);    
+	    }catch(Exception e){}
+	    c++;
+	    if(result<0){
+		x=x+m;
+	    }
+	    if(result>0){
+		x=x-m;
+	    }
+	}
+	if(data[x].equals(t)){
+    }
 
-    System.out.println(t.set(4, "cow"));
-    System.out.println(t.toString());
-  }
+    /*
+    public int search(String t){
+	for(int c=0;math.pow(2,c)<size;c++){
+	    int m = size/math.pow(2,c);
+	    if(data[m].equals(t)){
+		return m;
+	    }
+    }
+    */
 }

@@ -112,4 +112,13 @@ public class SuperArray{
       }
     }
   }
+
+    public int find(String t){
+	for(int i=0;0<size;i++){
+	    if(data[i].equals(t)){
+		return i;
+	    }
+	}
+	return -10;
+    }
 }
