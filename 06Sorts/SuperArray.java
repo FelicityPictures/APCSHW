@@ -1,6 +1,6 @@
 public class SuperArray{
     int size;
-    String[] data;
+    int[] data;
 
     public SuperArray(){
 	this(10);
@@ -22,14 +22,14 @@ public class SuperArray{
 	return res + "]";
     }
 
-    public void add(String o){
+    public void add(int o){
 	if(size() == data.length){
 	    resize(size * 2);
 	}
 	data[ size ] = o;
 	size++;
     }
-    public void add(int index, String o){
+    public void add(int index, int o){
 	if(index < 0 || index > size() ){
 	    throw new IndexOutOfBoundsException();
 	}				
@@ -60,7 +60,7 @@ public class SuperArray{
 	data = newData;
     }
 		
-    public String set(int index, String o){
+    public String set(int index, int o){
 	if(index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -93,72 +93,29 @@ public class SuperArray{
 	return temp;
     }
 
-    public void insertionSort(){
-	for(int i = 1; i<size()-1;i++){
-	    int result = data[i].compareTo(data[i+1]);
-	    String x = new String(data[i]);
-	    String y = new String(data[i+1]);
-	    if(result>0){
-		data[i] = y;
-		data[i+1]=x;
-	    }
-	    for(int m = i;m>0;m--){
-		String z = new String(data[m-1]);
-		result = y.compareTo(z);
-		if(result<0){
-		    data[m]=z;
-		    data[m-1]=y;
-		}
+  public void bubbleSort(){
+	for(int i=size;i>1;i--){
+	    if(data[i]>data[i-1]){
+		int m = data[i];
+		data[i] = data[i-1];
+		data[i-1]=m;
 	    }
 	}
-    }
-
-    public void selectionSort(){
-	for(int m=0; m<size-1; m++){
-	    String s=data[m];
-	    for(int i=m; i<size-1; i++){
-		int result = data[i].compareTo(data[i+1]);
-		if(result>0){
-		    s = data[i+1];
-		    remove(i+1);
-		}
-	    }
-	    if(!s.equals(data[m])){
-		add(m,s);
-	    }
-	}
-    }
-
-    public int find(String t){
-	for(int i=0;0<size;i++){
-	    if(data[i].equals(t)){
-		return i;
-	    }
-	}
-	return -10;
-    }
+  }
 
     public static void main(String[]args){
 	SuperArray test = new SuperArray();
-	test.add("dog");
-	test.add("cat");
-	test.add("frog");
-	test.add("beetle");
-	test.add("cows");
-	test.add("turtle");
-	test.add("hedgehog");
-	test.add("chameleon");
-	test.add("lion");
-	test.add("ferret");
-	test.add("bird");
+	test.add(99);
+	test.add(6);
+	test.add(2);
+	test.add(203);
+	test.add(9);
+	test.add(32);
+	test.add(3);
+	test.add(84);
+	test.add(2);
 	System.out.println(test.toString());
-	//testing find method
-	/*
-	  try{
-	  System.out.println(test.find("lion"));
-	  }catch(Exception e){
-	  System.out.println("String not found in the array.");
-	  }
-	*/
+	test.bubbleSort();
+	System.out.println(test.toString());
     }
 }
