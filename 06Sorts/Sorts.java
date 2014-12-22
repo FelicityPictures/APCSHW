@@ -54,7 +54,6 @@ public class Sorts{
     }
   }
 
-  //get place digit
   public static int getPlaceValue(int num, int p){
     int m = Math.abs((num / (int) Math.pow(10, (double) p - 1)) % 10);
     return m;
